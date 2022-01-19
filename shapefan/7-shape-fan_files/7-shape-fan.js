@@ -16,30 +16,26 @@ window.onload = function init()
 
 
 
-    var vertices = new Float32Array([ -0.45,  0.0,
-      -0.20,  0.0,
-      -0.45,  0.55,
-       -0.20,   0.75,
-       -0.45,  0.75,
-       -0.20,  0.95,
-       -0.45,  0.75,
+    var vertices = new Float32Array([ 0.0,  -0.75,
+      0.5,  -0.75,
+      0.2,  0.35,
+      0.75, 0.75,
+      0.2,  0.35,
+      -0.65,  0.75,
+      -0.65,  0.35,
+      //-0.65,  0.75,
 
 
-
-       -0.65, 0.95,
-       -0.85, 0.75,
-       -0.85, 0.95,
 
 
         ]);
 
-    //   var y = new Float32Array([ -0.45,  0.55,
-    //     -0.65,  0.75,
-    //     -0.85,  0.55,
-    //      -0.95,   0.75,
-    //      -0.95,  0.55,
-    //       ]);
-    // var vertices = x+y;
+        // var vertices = new Float32Array([ 0.75,  0.75,
+        //                                  -0.65,  0.75,
+        //                                  -0.65,  0.35,
+        //                                   0.2,   0.35,
+        //                                   0.0,  -0.75,
+        //                                   0.5,  -0.75]);
 
 
     //  Configure WebGL
@@ -70,5 +66,5 @@ window.onload = function init()
 
 function render() {
     gl.clear( gl.COLOR_BUFFER_BIT );
-    gl.drawArrays( gl.TRIANGLE_STRIP, 0, 10 );
+    gl.drawArrays( gl.TRIANGLE_STRIP, 0, 7 );
 }
