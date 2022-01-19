@@ -35,12 +35,6 @@ window.onload = function init()
     var p = scale(0.25, add(u,v));
 
 
-
-
-
-
-
-
     // And, add our initial point into our array of points
 
     points = [ p];
@@ -51,18 +45,6 @@ window.onload = function init()
     //var k = 0;
 
     for ( var i = 0; points.length < NumPoints; ++i ) {
-        // var j;
-        // if(k < 18){
-        //   j = 0;
-        // }else if (k < 19) {
-        //   j = 1;
-        // }else if (k < 20) {
-        //   j = 2;
-        // }else if (k = 20) {
-        //   k = 0;
-        //   j = 0;
-        // }
-        // k++;
         var j;
         var x = (Math.random());
         if ( x < 0.9) {
