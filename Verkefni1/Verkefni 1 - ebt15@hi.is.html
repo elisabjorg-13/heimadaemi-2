@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- saved from url=(0115)file:///Users/kristbjorgthorsteins/Documents/o%CC%88nn%204/To%CC%88lvugrafi%CC%81k/Archive/v1test%20copy/Mario.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<style>
+		#gl-canvas{border:2px solid black;}
+	</style>
+
+
+<title>Verkefni 1 - ebt15@hi.is</title>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+attribute vec4 vPosition;
+
+void
+main()
+{
+    gl_Position = vPosition;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+precision mediump float;
+
+uniform vec4 fColor;
+void
+main()
+{
+    gl_FragColor = fColor;
+}
+</script>
+
+<script type="text/javascript" src="./Verkefni 1 - ebt15@hi.is_files/webgl-utils.js"></script>
+<script type="text/javascript" src="./Verkefni 1 - ebt15@hi.is_files/initShaders.js"></script>
+<script type="text/javascript" src="./Verkefni 1 - ebt15@hi.is_files/MV.js"></script>
+<script type="text/javascript" src="./Verkefni 1 - ebt15@hi.is_files/Mario.js"></script>
+
+</head><body>
+  <div id="text">
+
+  </div>
+<canvas id="gl-canvas" width="700" height="400">
+
+
+</canvas></body></html>
