@@ -27,7 +27,7 @@ var userZPos = 2.0;
 var userIncr = 0.1;                // Size of forward/backward step
 var userAngle = 270.0;             // Direction of the user in degrees
 var userXDir = 0.0;                // X-coordinate of heading
-//var userZDir = -1.0;               // Z-coordinate of heading
+var userZDir = -1.0;               // Z-coordinate of heading
 
 
 var movement = false;
@@ -59,7 +59,7 @@ var vertices = [
 ];
 
 // Mynsturhnit fyrir vegg
-var texCoords = [
+//var texCoords = [
     vec2(  0.0, 0.0 ),
     vec2( 10.0, 0.0 ),
     vec2( 10.0, 1.0 ),
@@ -73,7 +73,7 @@ var texCoords = [
     vec2( 10.0, 10.0 ),
     vec2(  0.0, 10.0 ),
     vec2(  0.0,  0.0 )
-];
+//];
 
 
 window.onload = function init() {
