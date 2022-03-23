@@ -27,7 +27,7 @@ var userZPos = 2.0;
 var userIncr = 0.1;                // Size of forward/backward step
 var userAngle = 270.0;             // Direction of the user in degrees
 var userXDir = 0.0;                // X-coordinate of heading
-var userZDir = -1.0;               // Z-coordinate of heading
+//var userZDir = -1.0;               // Z-coordinate of heading
 
 
 var movement = false;
