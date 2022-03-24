@@ -22,12 +22,14 @@ var texVegg;
 var texGolf;
 
 // Breytur fyrir hreyfingu áhorfanda
-var userXPos = 0.0;
-var userZPos = 2.0;
+var userXPos = 5.0;
+var userZPos = 1.0;
 var userIncr = 0.1;                // Size of forward/backward step
-var userAngle = 270.0;             // Direction of the user in degrees
-var userXDir = 0.0;                // X-coordinate of heading
-var userZDir = -1.0;               // Z-coordinate of heading
+var userAngle = 180.0;             // Direction of the user in degrees
+var userXDir = 1.0;                // X-coordinate of heading
+var userZDir = 1.0;
+userXDir = Math.cos( radians(userAngle) );
+userZDir = Math.sin( radians(userAngle) );            // Z-coordinate of heading
 
 
 var movement = false;
@@ -45,21 +47,32 @@ var mvLoc;
 var vertices = [
     vec4( -5.0,  0.0, 0.0, 1.0 ),
     vec4(  5.0,  0.0, 0.0, 1.0 ),
-    vec4(  5.0,  1.0, 0.0, 1.0 ),
-    vec4(  5.0,  1.0, 0.0, 1.0 ),
-    vec4( -5.0,  1.0, 0.0, 1.0 ),
+    vec4(  5.0,  2.0, 0.0, 1.0 ),
+    vec4(  5.0,  2.0, 0.0, 1.0 ),
+    vec4( -5.0,  2.0, 0.0, 1.0 ),
     vec4( -5.0,  0.0, 0.0, 1.0 ),
 // Hnútar gólfsins (strax á eftir)
-    vec4( -5.0,  0.0, 10.0, 1.0 ),
-    vec4(  5.0,  0.0, 10.0, 1.0 ),
+    vec4( -5.0,  0.0, 2.0, 1.0 ),
+    vec4(  5.0,  0.0, 2.0, 1.0 ),
     vec4(  5.0,  0.0,  0.0, 1.0 ),
     vec4(  5.0,  0.0,  0.0, 1.0 ),
     vec4( -5.0,  0.0,  0.0, 1.0 ),
-    vec4( -5.0,  0.0, 10.0, 1.0 )
+    vec4( -5.0,  0.0, 2.0, 1.0 ),
+//Hnútar hins veggjarins
+    vec4( -5.0,  0.0, 2.0, 1.0 ),
+    vec4(  5.0,  0.0, 2.0, 1.0 ),
+    vec4(  5.0,  3.0, 2.0, 1.0 ),
+    vec4(  5.0,  3.0, 2.0, 1.0 ),
+    vec4( -5.0,  3.0, 2.0, 1.0 ),
+    vec4( -5.0,  0.0, 2.0, 1.0 ),
+
+    //
 ];
 
+
+
 // Mynsturhnit fyrir vegg
-//var texCoords = [
+var texCoords = [
     vec2(  0.0, 0.0 ),
     vec2( 10.0, 0.0 ),
     vec2( 10.0, 1.0 ),
@@ -72,8 +85,15 @@ var vertices = [
     vec2( 10.0, 10.0 ),
     vec2( 10.0, 10.0 ),
     vec2(  0.0, 10.0 ),
-    vec2(  0.0,  0.0 )
-//];
+    vec2(  0.0,  0.0 ),
+
+    vec2(  0.0, 0.0 ),
+    vec2( 10.0, 0.0 ),
+    vec2( 10.0, 1.0 ),
+    vec2( 10.0, 1.0 ),
+    vec2(  0.0, 1.0 ),
+    vec2(  0.0, 0.0 )
+];
 
 
 window.onload = function init() {
@@ -134,11 +154,22 @@ window.onload = function init() {
 
     gl.uniform1i(gl.getUniformLocation(program, "texture"), 0);
 
+    var veggImage2 = document.getElementById("VeggImage");
+    texVegg2 = gl.createTexture();
+    gl.bindTexture( gl.TEXTURE_2D, texVegg2 );
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, veggImage );
+    gl.generateMipmap( gl.TEXTURE_2D );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR );
+    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR );
+
+    gl.uniform1i(gl.getUniformLocation(program, "texture"), 0);
+
 
     proLoc = gl.getUniformLocation( program, "projection" );
     mvLoc = gl.getUniformLocation( program, "modelview" );
 
-    var proj = perspective( 50.0, 1.0, 0.2, 100.0 );
+    var proj = perspective( 120.0, 1.0, 0.2, 100.0 );
     gl.uniformMatrix4fv(proLoc, false, flatten(proj));
 
 
@@ -166,9 +197,9 @@ window.onload = function init() {
     // Event listener for keyboard
      window.addEventListener("keydown", function(e){
          switch( e.keyCode ) {
-            case 87:	// w
-                userXPos += userIncr * userXDir;
-                userZPos += userIncr * userZDir;;
+            case 38:	// w
+                userXPos -= userIncr;
+                //userZPos += userIncr * userZDir;;
                 break;
             case 83:	// s
                 userXPos -= userIncr * userXDir;
@@ -214,6 +245,9 @@ var render = function(){
     // Teikna gólf með mynstri
     gl.bindTexture( gl.TEXTURE_2D, texGolf );
     gl.drawArrays( gl.TRIANGLES, numVertices, numVertices );
+
+    gl.bindTexture( gl.TEXTURE_2D, texVegg2 );
+    gl.drawArrays( gl.TRIANGLES, 12, numVertices );
 
     requestAnimFrame(render);
 }
