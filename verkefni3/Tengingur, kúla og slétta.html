@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071)https://hjalmtyr.github.io/WebGL-forrit/ThreeJS/05-cube-ball-plane.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<title>Tengingur, kúla og slétta</title>
+	</head>
+	<body>
+        <canvas id="c" width="800" height="800"></canvas>
+		<script src="./Tengingur, kúla og slétta_files/three.js"></script>
+        <script src="./Tengingur, kúla og slétta_files/OrbitControls.js"></script>
+		<script>
+            // Ná í striga
+            const canvas = document.querySelector('#c');
+
+            // Skilgreina sviðsnet
+			const scene = new THREE.Scene();
+            scene.background = new THREE.Color('black');
+
+            // Skilgreina myndavél og staðsetja hana
+			const camera = new THREE.PerspectiveCamera( 100, canvas.clientWidth/canvas.clientHeight, 0.1, 1000 );
+
+			camera.position.y = 20;
+
+			camera.position.x = -2;
+
+
+
+            // Bæta við músarstýringu
+            const controls = new THREE.OrbitControls( camera, canvas );
+
+            // Skilgreina birtingaraðferð með afbjögun (antialias)
+			const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+
+
+            // Búa til kúlu með Phong áferð og bæta í sviðsnetið
+			const ballGeometry = new THREE.SphereGeometry( 0.25, 20, 20 );
+			const ballMaterial = new THREE.MeshPhongMaterial( { color: 0xFFFF00} );
+			const ball = new THREE.Mesh( ballGeometry, ballMaterial );
+			ball.position.z = 4;
+			ball.position.x = 4;
+
+
+
+
+
+            // Búa til sléttu með Phong áferð
+            // const planeGeometry = new THREE.PlaneGeometry( 10, 10 );
+            // const planeMaterial = new THREE.MeshPhongMaterial( { color: 0x0000FF } );
+            // const plane = new THREE.Mesh( planeGeometry, planeMaterial );
+            // plane.rotation.x = -0.5 * Math.PI;
+            // plane.position.set(0, -0.5, 0);
+            // scene.add( plane );
+
+
+            // Skilgreina ljósgjafa og bæta honum í sviðsnetið
+            const light = new THREE.DirectionalLight(0xFFFFFF, 1);
+            light.position.set(2, 4, 1);
+            scene.add(light);
+
+						class bolticlass {
+							constructor(i, j) {
+								this.i = i;
+								this.j = j;
+							}
+
+						}
+						const bolti = new bolticlass(0, 0);
+
+						scene.add( ball);
+
+
+
+			var matrix = [
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+				[0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0],
+				[0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0],
+				[0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+				[0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+				[0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+				[1, 1, 1, 1, 0, 1, 0, 0, 0,1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
+				[1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
+				[1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
+				[0, 0, 0, 0, 0, 1, 0, 1, 1, 1,1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0],
+				[0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0],
+				[0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+				[1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
+				[1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
+				[1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1],
+				[0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0],
+				[0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0],
+				[0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+			];
+
+			const fylkjalestur = function() {
+				for (i = 0; i < matrix.length; i++) {
+					for (j = 0; j < matrix.length; j++) {
+						if (matrix[i][j] == 0) {
+							teiknakubb(i, j);
+						}
+					}
+				}
+			}
+
+			const collisionupp = function (){
+				for (i = 0; i < matrix.length; i++) {
+					for (j = 0; j < matrix.length; j++) {
+						if(ball.position.z+1 == 1){
+							ball.position.z -= 0.0005;
+
+						}
+					}
+				}
+
+			}
+
+			const teiknakubb = function(i, j) {
+				const vegggeometry19 = new THREE.BoxGeometry(1.0, 0.3, 1.0);
+				const material19 = new THREE.MeshBasicMaterial( { color: 0xFF0000 } );
+				const cube19 = new THREE.Mesh( vegggeometry19, material19 );
+				cube19.position.x = i;
+				cube19.position.z = j;
+				cube19.position.y -= 0;
+				scene.add( cube19 );
+			}
+
+
+
+			const orvahreyfing = function() {
+
+
+				document.addEventListener("keydown", function(e) {
+					switch(e.keyCode) {
+						case 38:
+							// if(matrix[ball.position.z][ball.position.x-1] == 1){
+							// 	ball.position.z -= 1;
+							// 	bolti[j] -= 1;
+							//
+							// }
+							ball.position.z +=0.9;
+							break;
+						case 40:
+							ball.position.z += 0.0005;
+							break;
+						case 37:
+
+						if(matrix[bolti.i-1][bolti.j] == 1){
+							ball.position.x -= 0.0005;
+							bolti[i] -= 1;
+
+						}
+
+							break;
+						case 39:
+							ball.position.x += 0.0005;
+							break;
+
+					}
+				});
+
+
+			}
+
+            // Hreyfifall
+			const animate = function () {
+				requestAnimationFrame( animate );
+
+				orvahreyfing();
+
+				//ball.position.z -= 0.01;
+
+                //controls.update();
+				renderer.render( scene, camera );
+			};
+
+
+
+			animate();
+			fylkjalestur();
+		</script>
+
+</body></html>
